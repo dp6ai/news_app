@@ -1,0 +1,7 @@
+<form action='/articles' method='POST'>
+  <h2 class="form-signin-heading">Please add a new Article</h2>
+  <%= token_tag nil %>
+  <input type="text" class="input-block-level" placeholder="Article Title" name = "article_title"></br>
+  <input type="text" class="input-block-level" placeholder="Article Body" name = "article_body"></br>
+  <button class="btn btn-large btn-primary" type="submit">Submit</button>
+</form>

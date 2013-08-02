@@ -1,8 +1,7 @@
-<h1><%= @title %></h1>
-<p><%= @body %></p>
+<h2>List of Comments:</h2>
 
 <% if @comments.empty? %>
-	<h2><a href='/articles/<%= @id %>/comments/new' >Be the first to comment</a> </h2>
+	<h2><a href='/articles/<%= @article_id %>/comments/new' >Be the first to comment</a> </h2>
 <% else %>
 
 
@@ -12,22 +11,19 @@
 			</tr>
 
 		</table>
-	<a id='addcomment' href='/articles/<%= @id %>/comments/new' >Add a comment</a> <br/>
+	<a id='add-comment' href='/articles/<%= @article_id %>/comments/new' >Add a comment</a> <br/>
 <% end %>
-<a href='/articles/<%= @id %>' >Back to story</a> <br/>
+<a href='/articles/<%= @article_id %>' >Back to story</a> <br/>
 <a href='/articles' >Home</a>
-<a href="/articles">All</a>
-<a href="/articles/<%= @id %>/edit">Edit</a>
 
 <div id="new-comments-form">
 
 </div>
 
-
-
 <script>
+
     // FILL IN THE ARTICLES LIST
-      $.getJSON('/articles/<%= @id %>/comments', function(comments){
+      $.getJSON('/articles/<%= @article_id %>/comments', function(comments){
       	$.each(comments, function(index, comment){
       		console.log(comment)
       		$('.comment-list').append(
@@ -43,17 +39,17 @@
       	})
 
       })
-        $( "#addcomment" ).click(function(event) {
+    // ON ADD STORY CLICK SHOW THE FORM FOR ADDING
+
+    $( "#add-comment" ).click(function(event) {
 
     	event.preventDefault()
   // alert( "Handler for .click() called." );
-    	$.get('/articles/<%= @id %>/comments/new', function(page){
+    	$.get('/articles/<%= @article_id %>/comments/new', function(page){
 
     		var new_comment_form = $(page).filter("#new-comments-form").html();
     		// console.log(new_comment_form)
     		$('#new-comments-form').append(new_comment_form)
     	});	
 	});
-
-
-</script>   
+</script>

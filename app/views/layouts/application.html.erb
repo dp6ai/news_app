@@ -8,7 +8,21 @@
 </head>
 <body>
 
-<%= yield %>
 
+<%= yield %>
+<div class='message'>
+	<h1><%= flash[:message] %></h1>
+</div>
 </body>
+
+
 </html>
+
+<!-- 
+<script>
+      jQuery.post('/rename',{name:"Bob"});
+</script> -->
+
+    <!-- 		$.('#new-article-form').append(
+    			new_form
+    	});	 -->

@@ -1,14 +1,15 @@
 
 <h1>Editing Articles</h1>
  
-<form action='/articles/<%= @id %>' method='post'>
+<form action='/articles/<%= @id %>' method='post' id="edit-form" >
   <h2 class="form-signin-heading">Edit Article <%= @title %></h2>
   <%= token_tag nil %>
   <input type="hidden" name="_method" value="put" />
-  <input type="text" class="input-block-level" placeholder="<%= @title %>" name = "article_title"></br>
+  <input type="text" label="title" class="input-block-level" placeholder="<%= @title %>" name = "article_title"></br>
   <input type="text" class="input-block-level" placeholder="<%= @body %>" name = "article_body"></br>
   <button class="btn btn-large btn-primary" type="submit">Submit</button>
 </form>
+
 <%= link_to 'Back', articles_path %>
 
 

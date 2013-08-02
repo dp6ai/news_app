@@ -1,11 +1,57 @@
 <h2>List of Items:</h2>
 
-<% @articles.each do |article| %>
-<table border="1" width="800">
-	<tr>
-		<td width="300"><a href="/articles/<%= article.id %>"><%= article.title %></h2></a></td>
-		<td width="300"><p><%= article.body %></p></td>
-		<td width="200"><a href="/articles/<%= article.id %>/edit" >edit</a></td>
-	</tr>
+<% if @articles == [] %>
+	<h1>No Users</h1>
+<% else %>
 
+	<table border="1" width="900"  class='article-list'>
+			<tr>
+				<th id="title">Title</th><th id="story">Story</th><th id="controls">Controls</th><th id="comments">Comments</th>
+			</tr>
+</table>
 <% end %>
+<a href='/articles/new' id="add-story">Add a story</a>
+<div id="new-article-form">
+
+</div>
+
+
+
+<script>
+    // FILL IN THE ARTICLES LIST
+      $.getJSON('/articles', function(articles){
+      	// console.log(articles)
+      	$.each(articles, function(index, article){
+      		 // console.log(article)
+      		$('.article-list').append(
+      			'<tr>'
+      			+'<td  headers="title" width="300"><a href="/articles/'+article.id+'">'
+      			+article.title
+      			+'</h2></a></td>'
+      			+'<td  headers="story" width="300"><p>'
+      			+article.body
+      			+'</p></td>'
+      			+'<td  headers="details" width="200"><a href="/articles/'+article.id+'/edit" >edit</a>&nbsp;&nbsp;&nbsp;<a href="/articles/'+article.id+'/comments" >comments</a></td>'
+      			// +'<td  headers="comments" width="100">'+x+'</td>'
+      			+'</tr>'
+      			)
+      	})
+      })
+    // ON ADD STORY CLICK SHOW THE FORM FOR ADDING
+
+
+    $( "#add-story" ).click(function(event) {
+
+    	event.preventDefault()
+  // alert( "Handler for .click() called." );
+    	$.get('/articles/new', function(page){
+    		//console.log(form);
+    		// var new_form = 	page.find('#new_articles')
+    		//console.log($(page).filter("#new_articles").html())
+    		var new_form = $(page).filter("#new_articles").html();
+    		$('#new-article-form').append(new_form)
+    	});	
+	});
+
+
+</script>
